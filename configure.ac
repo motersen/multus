@@ -1,0 +1,29 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.69])
+AC_INIT([wordcount], [0.0.0])
+AC_CONFIG_SRCDIR([string_utilities.c])
+AC_CONFIG_HEADERS([config.h])
+
+# Makes Makefile
+AM_INIT_AUTOMAKE
+
+# Checks for programs.
+AC_PROG_CC
+
+# Checks for libraries.
+AC_CHECK_LIB([glib-2.0],[g_free])
+
+# Checks for header files.
+AC_CHECK_HEADERS([stdlib.h string.h])
+AC_CHECK_HEADER([glib.h], , [AC_MSG_ERROR([Glib-Headerdatei wurde nicht gefunden. (glib.h im include-Pfad)])])
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+AC_FUNC_MALLOC
+AC_FUNC_REALLOC
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
