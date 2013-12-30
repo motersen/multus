@@ -10,14 +10,14 @@ AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE
 
 # Checks for programs.
-AC_PROG_CC
+AC_PROG_CC_C99
 
 # Checks for libraries.
 AC_CHECK_LIB([glib-2.0],[g_free])
 
 # Checks for header files.
+AC_DEFINE([_GNU_SOURCE], [1], [Enables GNU-Specifics])
 AC_CHECK_HEADERS([stdlib.h string.h])
-AC_CHECK_HEADER([glib.h], , [AC_MSG_ERROR([Glib-Headerdatei wurde nicht gefunden. (glib.h im include-Pfad)])])
 
 # Checks for typedefs, structures, and compiler characteristics.
 

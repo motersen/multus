@@ -17,4 +17,5 @@ int main(int argc, char* argv[]) {
     for(unsigned int i = 0;i<words->length;++i)
         hash_word(words->elements[i], hash);
     g_hash_table_foreach(hash, print_set, NULL);
+    return 0;
 }

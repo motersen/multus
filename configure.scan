@@ -17,7 +17,7 @@ AC_CHECK_LIB([glib-2.0],[g_free])
 
 # Checks for header files.
 AC_CHECK_HEADERS([stdlib.h string.h])
-AC_CHECK_HEADER([glib.h], , [AC_MSG_ERROR([Glib-Headerdatei wurde nicht gefunden. (glib.h im include-Pfad)])])
+AC_CHECK_HEADER([glib-2.0/glib.h], , [AC_MSG_ERROR([Glib-Headerdatei wurde nicht gefunden. (glib.h im include-Pfad)])])
 
 # Checks for typedefs, structures, and compiler characteristics.
 
