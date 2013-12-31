@@ -9,11 +9,11 @@ char* string_from_file(char const* filename) {
     GError* e = NULL;
     GIOChannel* f = g_io_channel_new_file(filename, "r", &e);
     if(!f) {
-        fprintf(stderr, "Konnte Datei »%s« nicht öffnen.\n", filename);
+        fprintf(stdout, "Konnte Datei »%s« nicht öffnen.\n", filename);
         return NULL;
     }
     if(g_io_channel_read_to_end(f, &out, NULL, &e) != G_IO_STATUS_NORMAL) {
-        fprintf(stderr, "Datei »%s« gefunden, aber nicht einlesbar.\n", filename);
+        fprintf(stdout, "Datei »%s« gefunden, aber nicht einlesbar.\n", filename);
         return NULL;
     }
     return out;
