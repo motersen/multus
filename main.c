@@ -17,11 +17,13 @@ int main(int argc, char* argv[]) {
     tok_array* words = tok_array_new(input, delimiters);
     GHashTable* hash = new_wordcount_hash();
     puts("Counting Words...");
-    for(unsigned int i = 0;i<words->length;++i)
-        hash_word(words->elements[i], hash);
+    for(char** ptr = words->elements;*ptr;++ptr)
+        hash_word(*ptr, hash);
     puts("Printing Words...");
     g_hash_table_foreach(hash, print_set, NULL);
     puts("Destroying the Table...");
     g_hash_table_destroy(hash);
+    puts("Freeing Words...");
+    tok_array_free(words);
     return 0;
 }

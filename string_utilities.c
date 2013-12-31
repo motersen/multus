@@ -31,6 +31,8 @@ tok_array* tok_array_new(char* instring, char const* delimiters) {
         out->elements[out->length-1] = txt;
         txt = strtok_r(NULL, delimiters, &scratch);
     }
+    out->elements = realloc(out->elements, sizeof(char*)*(out->length+1));
+    out->elements[out->length] = NULL;
     return out;
 }
 

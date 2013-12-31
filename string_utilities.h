@@ -13,5 +13,5 @@ char* string_from_file(char const* filename);
 
 tok_array* tok_array_new(char* instring, char const* delimiters);
 
-void tok_array_free(tok_array* tokin);
+void tok_array_free(tok_array* tok_in);
 #endif
