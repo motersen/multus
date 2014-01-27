@@ -1,7 +1,7 @@
 wordcount
 =========
 
-Copyright (c) 2013, Moritz Petersen: Simplified BSD License
+Copyright (c) 2013, Moritz Petersen: Simplified BSD License  
 See LICENSE File for full license text.
 
 __wordcount__ is a tool to count the number of occurences of words in texts.
