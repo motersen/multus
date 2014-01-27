@@ -23,7 +23,7 @@ void hash_word(char* word, GHashTable* hash) {
 void print_set(gpointer key_in, gpointer val_in, gpointer ignored) {
     char const* key = key_in;
     count_s const* val = val_in;
-    printf("%s\t\t%d\n", key, val->count);
+    printf("%d\t%s\n", val->count, key);
 }
 
 GHashTable* new_wordcount_hash() {
