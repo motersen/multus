@@ -1,4 +1,3 @@
-CC	=gcc
 CFLAGS=-Wall -O2 -std=c99
 LIBS	=-lglib-2.0
 INCLUDE =`pkg-config --cflags glib-2.0`
