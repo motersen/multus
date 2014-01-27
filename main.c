@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <getopt.h>
-#include <options.h>
+#include "options.h"
 #include <glib.h>
 #include "string_utilities.h"
 #include "wordcount.h"
