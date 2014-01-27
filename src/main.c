@@ -2,22 +2,27 @@
 #include <getopt.h>
 #include "options.h"
 #include <glib.h>
+#include "output.h"
 #include "string_utilities.h"
 #include "wordcount.h"
 
 int main(int argc, char* argv[]) {
     if(argc<2) {
-        fprintf(stderr, "Kein Dateiname angegeben. Verwendung:\n%s [textdatei]", *argv);
+        help();
         return -1;
     }
     optionstruct options = {};
     static struct option long_options[] = {
-        {"verbose", no_argument, NULL, 'v'},
+        {"help",    no_argument,       NULL, 'h'},
+        {"verbose", no_argument,       NULL, 'v'},
         {"file",    required_argument, NULL, 'f'},
-        {NULL, 0, NULL, 0}
+        {NULL,      0,                 NULL, 0}
     };
-    while((options.iterator = getopt_long(argc, argv, "vf:", long_options, &options.optindex)) != -1) {
+    while((options.iterator = getopt_long(argc, argv, "hvf:", long_options, &options.optindex)) != -1) {
         switch(options.iterator) {
+            case 'h':
+                help();
+                return 0;
             case 'v':
                 puts("verbose output set");
                 options.verbose = 1;
@@ -30,24 +35,22 @@ int main(int argc, char* argv[]) {
                 return -1;
         }
     }
-    puts("Reading File...");
+    print_verbose("Reading File...", options.verbose);
     char* input = string_from_file(options.file);
     if(!input)
         return -1;
     char* delimiters = " \n\t\r\"`~!?@#$%^&*()<>»«{}[]_-+=|\\;:,./";
-    puts("Parsing File...");
+    print_verbose("Parsing File...", options.verbose);
     tok_array* words = tok_array_new(input, delimiters);
     GHashTable* hash = new_wordcount_hash();
-    puts("Counting Words...");
+    print_verbose("Counting Words...", options.verbose);
     for(char** ptr = words->elements;*ptr;++ptr)
         hash_word(*ptr, hash);
-    if(options.verbose) {
-        puts("Printing Words...");
-        g_hash_table_foreach(hash, print_set, NULL);
-    }
-    puts("Destroying the Table...");
+    print_verbose("Printing Words...", options.verbose);
+    g_hash_table_foreach(hash, print_set, NULL);
+    print_verbose("Destroying the Table...", options.verbose);
     g_hash_table_destroy(hash);
-    puts("Freeing Words...");
+    print_verbose("Freeing Words...", options.verbose);
     tok_array_free(words);
     return 0;
 }

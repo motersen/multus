@@ -5,7 +5,7 @@ PATH_SRC=src
 PATH_OBJ=obj
 PATH_BIN=bin
 SOURCES:=$(PATH_SRC)/main.c $(PATH_SRC)/string_utilities.c \
-         $(PATH_SRC)/wordcount.c
+         $(PATH_SRC)/wordcount.c $(PATH_SRC)/output.c
 OBJECTS:=$(patsubst $(PATH_SRC)/%.c, $(PATH_OBJ)/%.o, $(SOURCES))
 FILENAME=wordcount
 
