@@ -13,8 +13,12 @@ FILENAME=wordcount
 all: $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LIBS) -o $(PATH_BIN)/$(FILENAME)
 
-$(OBJECTS): $(PATH_OBJ)/%.o: $(PATH_SRC)/%.c
+$(OBJECTS): $(PATH_OBJ)/%.o: $(PATH_SRC)/%.c prepare
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+prepare:
+	mkdir -p obj
+	mkdir -p bin
 
 clean:
 	rm -rf $(PATH_OBJ)/*
