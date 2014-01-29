@@ -4,7 +4,7 @@ wordcount
 Copyright (c) 2013, Moritz Petersen: Simplified BSD License  
 See LICENSE File for full license text.
 
-__wordcount__ is a tool to count the number of occurences of words in texts.
+__wordcount__ is a tool to count the occurrences of words in texts.
 
 ## Build
 
