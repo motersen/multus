@@ -1,5 +1,4 @@
 #include <glib.h>
-#include <string.h>
 #include "string_utilities.h"
 #include <stdio.h>
 #include <stdlib.h> //abort

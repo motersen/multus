@@ -1,5 +1,5 @@
 CC =c99
-CFLAGS=-Wall -O2
+CFLAGS=-Wall -O2 -D_POSIX_C_SOURCE=200809L
 LIBS	=-lglib-2.0
 INCLUDE =`pkg-config --cflags glib-2.0`
 PATH_SRC=src
