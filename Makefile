@@ -1,4 +1,5 @@
-CFLAGS=-Wall -O2 -std=c99
+CC =c99
+CFLAGS=-Wall -O2
 LIBS	=-lglib-2.0
 INCLUDE =`pkg-config --cflags glib-2.0`
 PATH_SRC=src
