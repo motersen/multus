@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <getopt.h>
 #include "options.h"
 #include <glib.h>
@@ -52,5 +53,6 @@ int main(int argc, char* argv[]) {
     g_hash_table_destroy(hash);
     print_verbose("Freeing Words...", options.verbose);
     tok_array_free(words);
+    free(options.file);
     return 0;
 }
