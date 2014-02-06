@@ -7,13 +7,13 @@ int print_verbose(char* msg, int opt)
 
 int help()
 {
-return printf("wordcount [options] [file]\n"
-              "required:\n"
-              "    -f --file <filename>\n"
-              "        Specifies the path to the File to be read\n"
-              "optional:\n"
+return printf("wordcount [options] <input>\n"
+              "options:\n"
               "    -h --help\n"
               "        Display this Help\n"
               "    -v --verbose\n"
-              "        Print information about operations\n");
+              "        Print information about operations\n"
+              "input:\n"
+              "    The path to the file to be analyzed\n"
+       );
 }

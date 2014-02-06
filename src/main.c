@@ -16,26 +16,28 @@ int main(int argc, char* argv[]) {
     static struct option long_options[] = {
         {"help",    no_argument,       NULL, 'h'},
         {"verbose", no_argument,       NULL, 'v'},
-        {"file",    required_argument, NULL, 'f'},
         {NULL,      0,                 NULL, 0}
     };
-    while((options.iterator = getopt_long(argc, argv, "hvf:", long_options, &options.optindex)) != -1) {
+    while((options.iterator = getopt_long(argc, argv, "hv", long_options, &options.optindex)) != -1) {
         switch(options.iterator) {
             case 'h':
                 help();
                 return 0;
             case 'v':
-                puts("verbose output set");
                 options.verbose = 1;
                 break;
-            case 'f':
-                options.file = strdup(optarg);
-                break;
             default:
+                help();
                 fprintf(stderr, "Invalid Option: %s\n", optarg);
                 return -1;
         }
     }
+    if(optind>=argc) {
+        help();
+        fprintf(stderr,"No input");
+        return -1;
+    }
+    options.file = strdup(argv[optind]);
     print_verbose("Reading File...", options.verbose);
     char* input = string_from_file(options.file);
     if(!input)

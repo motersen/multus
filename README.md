@@ -23,15 +23,14 @@ __wordcount__ is a tool to count the occurrences of words in texts.
 ## Use
 
 ```
-wordcount [options] [File]
-required:
-    -f --file <filename>
-        Specifies the path to the File to be read
-optional:
+wordcount [options] <input>
+options:
     -h --help
         Display this Help
     -v --verbose
         Print information about operations
+input:
+    The path to the file to be read
 ```
 
 ## ToDo
