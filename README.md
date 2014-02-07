@@ -25,12 +25,15 @@ __wordcount__ is a tool to count the occurrences of words in texts.
 ```
 wordcount [options] <input>
 options:
-    -h --help
-        Display this Help
-    -v --verbose
-        Print information about operations
+  -h --help
+    Display this Help
+  -v --verbose
+    Print information about operations
 input:
-    The path to the file to be read
+  The Input to be analyzed
+  Values:
+    Path to a file to be processed
+    '-' or no argument (or pipes) to use stdin
 ```
 
 ## ToDo

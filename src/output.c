@@ -9,11 +9,14 @@ int help()
 {
 return printf("wordcount [options] <input>\n"
               "options:\n"
-              "    -h --help\n"
-              "        Display this Help\n"
-              "    -v --verbose\n"
-              "        Print information about operations\n"
+              "\t-h --help\n"
+              "\t\tDisplay this Help\n"
+              "\t-v --verbose\n"
+              "\t\tPrint information about operations\n"
               "input:\n"
-              "    The path to the file to be analyzed\n"
+              "\tThe Input to be analyzed\n"
+              "\tValues:\n"
+              "\t\tPath to a file to be processed\n"
+              "\t\t'-' or no argument (or pipes) to use stdin\n"
        );
 }

@@ -9,7 +9,7 @@ typedef struct tok_array {
     unsigned int length;
 } tok_array;
 
-char* string_from_file(char const* filename);
+char* string_from_stream(FILE* stream);
 
 tok_array* tok_array_new(char* instring, char const* delimiters);
 

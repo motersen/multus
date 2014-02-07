@@ -1,10 +1,11 @@
 #ifndef Options
 #define Options
+#include <stdio.h>
 #include <getopt.h>
 
 typedef struct {
     unsigned int verbose: 1;
-    char* file;
+    FILE* input;
     int optindex;
     int iterator;
 } optionstruct;

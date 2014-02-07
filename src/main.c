@@ -8,10 +8,6 @@
 #include "wordcount.h"
 
 int main(int argc, char* argv[]) {
-    if(argc<2) {
-        help();
-        return -1;
-    }
     optionstruct options = {};
     static struct option long_options[] = {
         {"help",    no_argument,       NULL, 'h'},
@@ -32,18 +28,23 @@ int main(int argc, char* argv[]) {
                 return -1;
         }
     }
-    if(optind>=argc) {
-        help();
-        fprintf(stderr,"No input");
-        return -1;
+    if(optind>=argc || !strcmp(argv[optind], "-")) {
+        options.input = stdin;
+    } else {
+        options.input = fopen(argv[optind], "r");
+        if(options.input == NULL) {
+            fprintf(stderr, "Failed to read from »%s«\n", argv[optind]);
+            return -1;
+        }
     }
-    options.file = strdup(argv[optind]);
-    print_verbose("Reading File...", options.verbose);
-    char* input = string_from_file(options.file);
+    print_verbose("Reading Input...", options.verbose);
+    char* input = string_from_stream(options.input);
+    if(options.input != stdin)
+        fclose(options.input);
     if(!input)
         return -1;
     char* delimiters = " \n\t\r\"`~!?@#$%^&*()<>»«{}[]_-+=|\\;:,./";
-    print_verbose("Parsing File...", options.verbose);
+    print_verbose("Parsing Input...", options.verbose);
     tok_array* words = tok_array_new(input, delimiters);
     GHashTable* hash = new_wordcount_hash();
     print_verbose("Counting Words...", options.verbose);
@@ -55,6 +56,5 @@ int main(int argc, char* argv[]) {
     g_hash_table_destroy(hash);
     print_verbose("Freeing Words...", options.verbose);
     tok_array_free(words);
-    free(options.file);
     return 0;
 }
