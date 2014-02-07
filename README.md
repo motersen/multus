@@ -35,10 +35,3 @@ input:
     Path to a file to be processed
     '-' or no argument (or pipes) to use stdin
 ```
-
-## ToDo
-
-- Add support for Pipes & Here-Documents
-- Add case insensitivity
-- Add Documentation
-
