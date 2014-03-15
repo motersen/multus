@@ -29,7 +29,7 @@ sub scan_sources {
 }
 
 sub is_source {
-  (shift) =~ /\w+\.$src_ext/;
+  (shift) =~ /\w+\.$src_ext$/;
 }
 
 sub list_deps {
