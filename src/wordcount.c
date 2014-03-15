@@ -19,6 +19,17 @@ void hash_word(char* word, GHashTable* hash) {
     value->count++;
 }
 
+
+static void key_free(gpointer freekey) {
+    char* key = freekey;
+    free(key);
+}
+
+static void val_free(gpointer freeval) {
+    count_s* val = freeval;
+    free(val);
+}
+
 void print_set(gpointer key_in, gpointer val_in, gpointer ignored) {
     char const* key = key_in;
     count_s const* val = val_in;
@@ -27,14 +38,4 @@ void print_set(gpointer key_in, gpointer val_in, gpointer ignored) {
 
 GHashTable* new_wordcount_hash() {
     return g_hash_table_new_full(g_str_hash, g_str_equal, key_free, val_free);
-}
-
-void key_free(gpointer freekey) {
-    char* key = freekey;
-    free(key);
-}
-
-void val_free(gpointer freeval) {
-    count_s* val = freeval;
-    free(val);
 }
