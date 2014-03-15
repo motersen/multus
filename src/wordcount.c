@@ -11,7 +11,7 @@ void hash_word(char* word, GHashTable* hash) {
         *value = (count_s){};
         char* key = strdup(word);
         if(!key) {
-            fprintf(stderr, "Konnte Speicher für String »%s« nicht allozieren\n", word);
+            fprintf(stderr, "Could not allocate memory to store \"%s\"\n", word);
             return;
         }
         g_hash_table_insert(hash, key, value);
