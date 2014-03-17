@@ -30,31 +30,27 @@ int main(int argc, char* argv[]) {
     }
     if(optind>=argc || !strcmp(argv[optind], "-")) {
         options.input = stdin;
+        print_verbose("Input is read from STDIN", options.verbose);
     } else {
+        print_verbose("Input is read from File", options.verbose);
         options.input = fopen(argv[optind], "r");
         if(options.input == NULL) {
             fprintf(stderr, "Failed to read from »%s«\n", argv[optind]);
             return -1;
         }
     }
-    print_verbose("Reading Input...", options.verbose);
-    char* input = string_from_stream(options.input);
-    if(options.input != stdin)
-        fclose(options.input);
-    if(!input)
-        return -1;
-    char* delimiters = " \n\t\r\"`~!?@#$%^&*()<>»«{}[]_-+=|\\;:,./";
-    print_verbose("Parsing Input...", options.verbose);
-    tok_array* words = tok_array_new(input, delimiters);
     GHashTable* hash = new_wordcount_hash();
-    print_verbose("Counting Words...", options.verbose);
-    for(char** ptr = words->elements;*ptr;++ptr)
-        hash_word(*ptr, hash);
-    print_verbose("Printing Words...", options.verbose);
+    if(!hash)
+        fprintf(stderr, "Could not allocate table");
+    char* delimiters = " \n\t\r\"`~!?@#$%^&*()<>»«{}[]_-+=|\\;:,./";
+    if(options.input == stdin) {
+        hash_stream(hash, options.input, delimiters);
+    } else {
+        char* input = string_from_stream(options.input);
+        hash_string(hash, input, delimiters);
+        fclose(options.input);
+    }
     g_hash_table_foreach(hash, print_set, NULL);
-    print_verbose("Destroying the Table...", options.verbose);
     g_hash_table_destroy(hash);
-    print_verbose("Freeing Words...", options.verbose);
-    tok_array_free(words);
     return 0;
 }

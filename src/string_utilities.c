@@ -1,6 +1,7 @@
 #include "string_utilities.h"
 #include <stdio.h>
 #include <stdlib.h> //abort
+#include "wordcount.h"
 
 char* string_from_stream(FILE* stream) {
     char** lines = NULL;
@@ -32,8 +33,10 @@ tok_array* tok_array_new(char* instring, char const* delimiters) {
     *out = (tok_array){.base_string=instring};
     char* scratch = NULL;
     char* txt = strtok_r(instring, delimiters, &scratch);
-    if(!txt)
+    if(!txt) {
+        free(out);
         return NULL;
+    }
     while(txt) {
         out->elements = realloc(out->elements, sizeof(char*)*++(out->length));
         out->elements[out->length-1] = txt;

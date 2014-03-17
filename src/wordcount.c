@@ -12,6 +12,7 @@ void hash_word(char* word, GHashTable* hash) {
         char* key = strdup(word);
         if(!key) {
             fprintf(stderr, "Could not allocate memory to store \"%s\"\n", word);
+            free(value);
             return;
         }
         g_hash_table_insert(hash, key, value);
@@ -19,6 +20,27 @@ void hash_word(char* word, GHashTable* hash) {
     value->count++;
 }
 
+void hash_string(GHashTable* hash, char* string, char* delims) {
+    tok_array* words = tok_array_new(string, delims);
+    if(!words) {
+        free(string);
+        return;
+    }
+    for(char** ptr = words->elements;*ptr;++ptr)
+        hash_word(*ptr, hash);
+    tok_array_free(words);
+}
+
+void hash_stream(GHashTable* hash, FILE* stream, char* delims) {
+    char* buf = NULL;
+    size_t bufsiz = 0;
+    char* tmp = NULL;
+    while(getline(&buf, &bufsiz, stream) != -1) {
+        tmp = strdup(buf);
+        hash_string(hash, tmp, delims);
+    } 
+    free(buf);
+}
 
 static void key_free(gpointer freekey) {
     char* key = freekey;
