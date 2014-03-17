@@ -58,6 +58,6 @@ void print_set(gpointer key_in, gpointer val_in, gpointer ignored) {
     printf("%d\t%s\n", val->count, key);
 }
 
-GHashTable* new_wordcount_hash() {
+GHashTable* new_wordcount_hash(void) {
     return g_hash_table_new_full(g_str_hash, g_str_equal, key_free, val_free);
 }

@@ -5,7 +5,7 @@ int print_verbose(char* msg, int opt)
     return opt ? puts(msg) : 0;
 }
 
-int help()
+int help(void)
 {
 return printf("wordcount [options] <input>\n"
               "options:\n"

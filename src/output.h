@@ -2,5 +2,5 @@
 #define output
 int print_verbose(char* msg, int opt);
 
-int help();
+int help(void);
 #endif
