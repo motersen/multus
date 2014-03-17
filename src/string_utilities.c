@@ -1,7 +1,6 @@
 #include "string_utilities.h"
 #include <stdio.h>
 #include <stdlib.h> //abort
-#include "wordcount.h"
 
 char* string_from_stream(FILE* stream) {
     char** lines = NULL;
