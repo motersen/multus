@@ -85,7 +85,7 @@ sub make_obj {
 sub make_prepare {
   my $file = shift;
   print $file "prepare:\n";
-  print $file "\tmkdir $obj_dir $bin_dir\n\n";
+  print $file "\tmkdir -p $obj_dir $bin_dir\n\n";
 }
 
 sub make_clean {
