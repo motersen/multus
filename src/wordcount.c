@@ -4,7 +4,8 @@
 #include "string_utilities.h"
 #include "wordcount.h"
 
-void hash_word(char* word, GHashTable* hash) {
+void hash_word(char* word, GHashTable* hash)
+{
     count_s* value = g_hash_table_lookup(hash, word);
     if(!value) {
         value = malloc(sizeof(count_s));
@@ -20,7 +21,8 @@ void hash_word(char* word, GHashTable* hash) {
     value->count++;
 }
 
-void hash_string(GHashTable* hash, char* string, char* delims) {
+void hash_string(GHashTable* hash, char* string, char* delims)
+{
     tok_array* words = tok_array_new(string, delims);
     if(!words) {
         free(string);
@@ -31,7 +33,8 @@ void hash_string(GHashTable* hash, char* string, char* delims) {
     tok_array_free(words);
 }
 
-void hash_stream(GHashTable* hash, FILE* stream, char* delims) {
+void hash_stream(GHashTable* hash, FILE* stream, char* delims)
+{
     char* buf = NULL;
     size_t bufsiz = 0;
     char* tmp = NULL;
@@ -42,22 +45,26 @@ void hash_stream(GHashTable* hash, FILE* stream, char* delims) {
     free(buf);
 }
 
-static void key_free(gpointer freekey) {
+static void key_free(gpointer freekey)
+{
     char* key = freekey;
     free(key);
 }
 
-static void val_free(gpointer freeval) {
+static void val_free(gpointer freeval)
+{
     count_s* val = freeval;
     free(val);
 }
 
-void print_set(gpointer key_in, gpointer val_in, gpointer ignored) {
+void print_set(gpointer key_in, gpointer val_in, gpointer ignored)
+{
     char const* key = key_in;
     count_s const* val = val_in;
     printf("%d\t%s\n", val->count, key);
 }
 
-GHashTable* new_wordcount_hash(void) {
+GHashTable* new_wordcount_hash(void)
+{
     return g_hash_table_new_full(g_str_hash, g_str_equal, key_free, val_free);
 }

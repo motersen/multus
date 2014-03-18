@@ -9,7 +9,8 @@
 
 optionstruct options = {};
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     static struct option long_options[] = {
         {"help",    no_argument,       NULL, 'h'},
         {"verbose", no_argument,       NULL, 'v'},

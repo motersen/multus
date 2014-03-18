@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h> //abort
 
-char* string_from_stream(FILE* stream) {
+char* string_from_stream(FILE* stream)
+{
     char** lines = NULL;
     int length=0;
     char* buf = NULL;
@@ -27,7 +28,8 @@ char* string_from_stream(FILE* stream) {
     return out;
 }
 
-tok_array* tok_array_new(char* instring, char const* delimiters) {
+tok_array* tok_array_new(char* instring, char const* delimiters)
+{
     tok_array* out = malloc(sizeof(tok_array));
     *out = (tok_array){.base_string=instring};
     char* scratch = NULL;
@@ -46,7 +48,8 @@ tok_array* tok_array_new(char* instring, char const* delimiters) {
     return out;
 }
 
-void tok_array_free(tok_array* tok_in) {
+void tok_array_free(tok_array* tok_in)
+{
     if(tok_in == NULL)
         return;
     free(tok_in->base_string);
