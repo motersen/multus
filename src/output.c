@@ -7,16 +7,13 @@ int print_verbose(char* msg, int opt)
 
 int help(void)
 {
-return printf("wordcount [options] <input>\n"
-              "options:\n"
-              "\t-h --help\n"
-              "\t\tDisplay this Help\n"
-              "\t-v --verbose\n"
-              "\t\tPrint information about operations\n"
-              "input:\n"
-              "\tThe Input to be analyzed\n"
-              "\tValues:\n"
-              "\t\tPath to a file to be processed\n"
-              "\t\t'-' or no argument (or pipes) to use stdin\n"
-       );
+return printf(  "wordcount [OPTIONS] [INPUT]\n"
+                "OPTIONS:\n"
+                "\t  -h --help\n"
+                "\t\t    Display this Help\n"
+                "\t  -v --verbose\n"
+                "\t\t    Print status information\n"
+                "\n"
+                "If INPUT is passed, it will be tried to read from a file with the name.\n"
+                "Otherwise, or if INPUT is '-', input will be read from stdin.\n");
 }

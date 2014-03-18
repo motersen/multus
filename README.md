@@ -18,22 +18,20 @@ __wordcount__ is a tool to count the occurrences of words in texts.
 - Libraries
   + glib-2.0
 
-- Run ```make``` to compile.
+- Run ```make``` twice to compile.
 - The executable should now be at bin/wordcount.
-- Run ```make clean``` to remove all object files.
+- Run ```make clean``` to reset the project to source state.
 
 ## Use
 
 ```
-wordcount [options] <input>
-options:
+wordcount [OPTIONS] [INPUT]
+OPTIONS:
   -h --help
     Display this Help
   -v --verbose
-    Print information about operations
-input:
-  The Input to be analyzed
-  Values:
-    Path to a file to be processed
-    '-' or no argument (or pipes) to use stdin
+    Print status information
+
+If INPUT is passed, it will be tried to read from a file with the name.
+Otherwise, or if INPUT is '-', input will be read from stdin.
 ```
