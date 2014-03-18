@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include "options.h"
 
-int print_verbose(char* msg, int opt)
+int print_verbose(char* msg)
 {
-    return opt ? puts(msg) : 0;
+    return options.verbose ? puts(msg) : 0;
 }
 
 int help(void)

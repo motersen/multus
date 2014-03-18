@@ -9,4 +9,6 @@ typedef struct {
     int optindex;
     int iterator;
 } optionstruct;
+
+extern optionstruct options;
 #endif

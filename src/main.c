@@ -7,8 +7,9 @@
 #include "string_utilities.h"
 #include "wordcount.h"
 
+optionstruct options = {};
+
 int main(int argc, char* argv[]) {
-    optionstruct options = {};
     static struct option long_options[] = {
         {"help",    no_argument,       NULL, 'h'},
         {"verbose", no_argument,       NULL, 'v'},
@@ -30,9 +31,9 @@ int main(int argc, char* argv[]) {
     }
     if(optind>=argc || !strcmp(argv[optind], "-")) {
         options.input = stdin;
-        print_verbose("Input is read from STDIN", options.verbose);
+        print_verbose("Input is read from STDIN");
     } else {
-        print_verbose("Input is read from File", options.verbose);
+        print_verbose("Input is read from File");
         options.input = fopen(argv[optind], "r");
         if(options.input == NULL) {
             fprintf(stderr, "Failed to read from »%s«\n", argv[optind]);
