@@ -1,9 +1,34 @@
 #include <stdio.h>
+#include <stdarg.h>
 #include "options.h"
 
-int print_verbose(char* msg)
+static int say_va(unsigned int minll,
+                  FILE* stream,
+                  char* format,
+                  va_list vars)
 {
-    return options.verbose ? puts(msg) : 0;
+    return (options.loglevel <= minll) ? vfprintf(stream, format, vars)
+                                       : 0;
+}
+
+int say(unsigned int minll, char* format, ...)
+{
+    int status;
+    va_list vars;
+    va_start(vars, format);
+    status = say_va(minll, stdout, format, vars);
+    va_end(vars);
+    return status;
+}
+
+int say_stream(unsigned int minll, FILE* stream, char* format, ...)
+{
+    int status;
+    va_list vars;
+    va_start(vars, format);
+    status = say_va(minll, stream, format, vars);
+    va_end(vars);
+    return status;
 }
 
 int help(void)

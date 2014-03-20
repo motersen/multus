@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "string_utilities.h"
+#include "options.h"
+#include "output.h"
 #include "wordcount.h"
 
 void hash_word(char* word, GHashTable* hash)
@@ -61,7 +63,7 @@ void print_set(gpointer key_in, gpointer val_in, gpointer ignored)
 {
     char const* key = key_in;
     count_s const* val = val_in;
-    printf("%d\t%s\n", val->count, key);
+    say(W_LOG_NORMAL, "%d\t%s\n", val->count, key);
 }
 
 GHashTable* new_wordcount_hash(void)
