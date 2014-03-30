@@ -3,16 +3,20 @@
 #include <stdio.h>
 #include <getopt.h>
 
-#define W_LOG_VERBOSE 0
-#define W_LOG_NORMAL  1
-#define W_LOG_QUIET   2
+#define W_FLAG_VERBOSE  0
+#define W_FLAG_QUIET    1
 
-typedef struct {
-    unsigned int loglevel: 2;
-    FILE* input;
-    int optindex;
-    int iterator;
-} optionstruct;
+/* Evaluate the first argc options given in argv */
+int parse_options(int argc, char* argv[]);
 
-extern optionstruct options;
+/* Returns 1 if the requested flag (as defined above)
+ * is set and 0 otherwise.
+ */
+int flag_get(unsigned int flag);
+
+/* Set the requested flag */
+void flag_set(unsigned int flag);
+
+/* Unset the requested flag */
+void flag_unset(unsigned int flag);
 #endif
