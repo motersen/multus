@@ -1,32 +1,6 @@
 #include "string_utilities.h"
-#include <stdio.h>
-#include <stdlib.h> //abort
-
-char* string_from_stream(FILE* stream)
-{
-    char** lines = NULL;
-    int length=0;
-    char* buf = NULL;
-    size_t bufsiz = 0;
-    ssize_t buflen=0;
-    ssize_t chars=0;
-    while((buflen = getline(&buf, &bufsiz, stream)) != -1) {
-        lines = realloc(lines, sizeof(char*) * ++length);
-        lines[length-1] = strdup(buf);
-        chars += buflen;
-    }
-    free(buf);
-    lines = realloc(lines, sizeof(char*) * ++length);
-    lines[length-1] = NULL;
-    char* out = malloc(chars+2);
-    *out = 0;
-    for(char** it=lines;*it;++it) {
-        out = strcat(out, *it);
-        free(*it);
-    }
-    free(lines);
-    return out;
-}
+#include <stdlib.h>
+#include <string.h>
 
 tok_array* tok_array_new(char* instring, char const* delimiters)
 {
