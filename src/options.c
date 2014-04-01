@@ -43,16 +43,10 @@ int parse_options(int argc, char* argv[])
         return input_open(argv[optind]);
 }
 
-/* Flip the value of the bit at index
- * flag from LSB.
- * 1 is shifted to the left by the index of the flag to
- * represent the flag field with only the requested flag
- * set. The Value of that flag is then flipped in the 
- * flag field by XOR-ing.
- */ 
-static void flag_flip(unsigned int flag)
+/* Mask the bit at the requested position */
+static unsigned int bitmask(unsigned int flag)
 {
-    options.flags ^= (1 << flag);
+    return 1 << flag;
 }
 
 /* Detect if the bit at the requested index in the flag
@@ -71,13 +65,11 @@ int flag_get(unsigned int flag)
 /* Set the bit at the requested index in the flag field to 1 */
 void flag_set(unsigned int flag)
 {
-    if(!flag_get(flag))
-        flag_flip(flag);
+    options.flags |= bitmask(flag);
 }
 
 /* Set the bit at the requested index in the flag field to 0 */
 void flag_unset(unsigned int flag)
 {
-    if(flag_get(flag))
-        flag_flip(flag);
+    options.flags &= ~bitmask(flag);
 }
