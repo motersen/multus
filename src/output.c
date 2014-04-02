@@ -44,15 +44,17 @@ int say_stream(int minll, FILE* stream, char* format, ...)
 int help(void)
 {
 return say(W_LOG_NORMAL,
-            "wordcount [OPTIONS] [INPUT]\n"
+            "wordcount [OPTIONS] [INPUT..]\n"
             "OPTIONS:\n"
             "\t-h --help\n"
             "\t        Display this Help\n"
             "\t-v --verbose\n"
             "\t        Print more information\n"
             "\t-q --quiet\n"
-            "\t        Print only Errors.\n"       
+            "\t        Print only errors.\n"       
             "\n"
-            "If INPUT is passed, it will be tried to read from a file with the name.\n"
-            "Otherwise, or if INPUT is '-', input will be read from stdin.\n");
+            "INPUT may be sources that will be evaluated. Stdin is represented by\n"
+            "\'-\', everything else is treated as a path to a file.\n"
+            "If INPUT is omitted, stdin is evaluated\n"
+            );
 }

@@ -25,13 +25,16 @@ __wordcount__ is a tool to count the occurrences of words in texts.
 ## Use
 
 ```
-wordcount [OPTIONS] [INPUT]
+wordcount [OPTIONS] [INPUT..]
 OPTIONS:
   -h --help
     Display this Help
   -v --verbose
     Print status information
+  -q --quiet
+    Print only errors
 
-If INPUT is passed, it will be tried to read from a file with the name.
-Otherwise, or if INPUT is '-', input will be read from stdin.
+INPUT may be sources that will be evaluated. Stdin is represented by
+"-", everything else is treated as a path to a file.
+If INPUT is omitted, stdin is evaluated
 ```
