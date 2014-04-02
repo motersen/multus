@@ -38,9 +38,10 @@ int parse_options(int argc, char* argv[])
         }
     }
     if(optind>=argc)
-        return input_open(NULL);
+        input_open(NULL);
     else
-        return input_open(argv[optind]);
+        input_open(argv+optind);
+    return 0;
 }
 
 /* Mask the bit at the requested position */

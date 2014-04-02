@@ -1,37 +1,65 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "input.h"
 #include "output.h"
 
-static FILE* input = NULL;
+static FILE** input = NULL;
 
-int input_open(char* src)
+static FILE* open_stream(char* src)
 {
-    if(input)
-        input_close();
-    if(!src || !strcmp(src, "-")) {
+    FILE* ret = NULL;
+    if(!strcmp(src, "-")) {
         say(W_LOG_VERBOSE, "Input is read from STDIN\n");
-        input = stdin;
-        return 0;
+        ret = stdin;
+    } else {
+        say(W_LOG_VERBOSE, "Input is read from File %s\n", src);
+        ret = fopen(src, "r");
+        if(!ret)
+            say_stream(W_LOG_ERROR, stderr, "Could not open file %s\n", src);
     }
-    say(W_LOG_VERBOSE, "Input is read from File\n");
-    input = fopen(src, "r");
-    if(!input) {
-        say_stream(W_LOG_ERROR,
-                   stderr, "Could not open file %s\n", src);
-        return -1;
-    }
-    return 0;
+    return ret;
 }
 
+void input_open(char** src)
+{
+    int size = 0;
+    if(input)
+        input_close();
+    if(!src) {
+        say(W_LOG_VERBOSE, "Input is read from STDIN\n");
+        input = realloc(input, sizeof(FILE*)*++size);
+        input[size-1] = stdin;
+        goto addnull;
+    }
+    char** strit = src;
+    FILE*  tmp = NULL;
+    while(*strit) {
+        tmp = open_stream(*strit);
+        if(!tmp)
+            goto next;
+        input = realloc(input, sizeof(FILE*)*++size);
+        input[size-1] = tmp;
+next:
+        ++strit;
+    }
+addnull:
+    input = realloc(input, sizeof(FILE*)*++size);
+    input[size-1] = NULL;
+}
 
-FILE* input_stream(void)
+FILE** input_streams(void)
 {
     return input;
 }
 
-int input_close(void) {
-    if(input != stdin)
-        return fclose(input);
-    return 0;
+void input_close(void)
+{
+    for(FILE** it=input;*it;++it) {
+        if(*it == stdin)
+            continue;
+        if(fclose(*it))
+            say_stream(W_LOG_ERROR, stderr, "Could not close File\n");
+    }
+    free(input);
 }

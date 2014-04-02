@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     if(!hash)
         say_stream(W_LOG_ERROR, stderr, "Could not allocate table\n");
     char* delimiters = " \n\t\r\"`~!?@#$%^&*()<>»«{}[]_-+=|\\;:,./";
-    hash_stream(hash, input_stream(), delimiters);
+    hash_streams(hash, input_streams(), delimiters);
     input_close();
     g_hash_table_foreach(hash, print_set, NULL);
     g_hash_table_destroy(hash);

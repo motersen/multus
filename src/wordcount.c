@@ -48,6 +48,12 @@ void hash_stream(GHashTable* hash, FILE* stream, char* delims)
     free(buf);
 }
 
+void hash_streams(GHashTable* hash, FILE** streams, char* delims)
+{
+    for(FILE** it=streams;*it;++it)
+        hash_stream(hash, *it, delims);
+}
+
 static void key_free(gpointer freekey)
 {
     char* key = freekey;

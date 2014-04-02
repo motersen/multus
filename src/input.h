@@ -2,20 +2,17 @@
 #define INPUT_H
 #include <stdio.h>
 
-/* Open the src for reading 
- * If src is '-' or NULL, stdin is used for input.
- * Otherwise src is assumed to be the path to a file.
- * If the source could be opened, 0 is returned.
- * If the file could not be opened, an W_LOG_ERROR is
- * printed and -1 is returned.
+/* Open the sources for reading 
+ * If an element is '-', stdin is used for input.
+ * Otherwise it is assumed to be the path to a file.
  * If input_open was called before, it also closes the
- * previous source.
+ * previous sources.
  * */
-int input_open(char* src);
+void input_open(char** src);
 
-/* Receive a pointer to the opened source */
-FILE* input_stream(void);
+/* Receive a pointer to the opened sources */
+FILE** input_streams(void);
 
-/* Close the opened source */
-int input_close(void);
+/* Close the opened sources */
+void input_close(void);
 #endif
