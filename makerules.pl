@@ -13,7 +13,7 @@ my $src_ext = 'c';
 my $header_ext = 'h';
 my $obj_ext = 'o';
 my $header_format = qr/\w+\.$header_ext/;
-my $bin = "${bin_dir}wordcount";
+my $bin = "${bin_dir}multus";
 
 my $targets = scan_sources();
 make_rules($targets, $rules_file);

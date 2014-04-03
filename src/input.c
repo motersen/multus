@@ -10,13 +10,13 @@ static FILE* open_stream(char* src)
 {
     FILE* ret = NULL;
     if(!strcmp(src, "-")) {
-        say(W_LOG_VERBOSE, "Input is read from STDIN\n");
+        say(M_LOG_VERBOSE, "Input is read from STDIN\n");
         ret = stdin;
     } else {
-        say(W_LOG_VERBOSE, "Input is read from File %s\n", src);
+        say(M_LOG_VERBOSE, "Input is read from File %s\n", src);
         ret = fopen(src, "r");
         if(!ret)
-            say_stream(W_LOG_ERROR, stderr, "Could not open file %s\n", src);
+            say_stream(M_LOG_ERROR, stderr, "Could not open file %s\n", src);
     }
     return ret;
 }
@@ -27,7 +27,7 @@ void input_open(char** src)
     if(input)
         input_close();
     if(!src) {
-        say(W_LOG_VERBOSE, "Input is read from STDIN\n");
+        say(M_LOG_VERBOSE, "Input is read from STDIN\n");
         input = realloc(input, sizeof(FILE*)*++size);
         input[size-1] = stdin;
         goto addnull;
@@ -59,7 +59,7 @@ void input_close(void)
         if(*it == stdin)
             continue;
         if(fclose(*it))
-            say_stream(W_LOG_ERROR, stderr, "Could not close File\n");
+            say_stream(M_LOG_ERROR, stderr, "Could not close File\n");
     }
     free(input);
 }

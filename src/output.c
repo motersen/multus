@@ -5,10 +5,10 @@
 
 static int loglevel_match(int minll)
 {
-    int ll = (flag_get(W_FLAG_VERBOSE) == flag_get(W_FLAG_QUIET))
-            ? W_LOG_NORMAL
-            : flag_get(W_FLAG_VERBOSE) ? W_LOG_VERBOSE
-                                       : W_LOG_ERROR;
+    int ll = (flag_get(M_FLAG_VERBOSE) == flag_get(M_FLAG_QUIET))
+            ? M_LOG_NORMAL
+            : flag_get(M_FLAG_VERBOSE) ? M_LOG_VERBOSE
+                                       : M_LOG_ERROR;
     return minll >= ll;
 }
 
@@ -43,7 +43,7 @@ int say_stream(int minll, FILE* stream, char* format, ...)
 
 int help(void)
 {
-return say(W_LOG_NORMAL,
+return say(M_LOG_NORMAL,
             "wordcount [OPTIONS] [INPUT..]\n"
             "OPTIONS:\n"
             "\t-h --help\n"

@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <getopt.h>
 
-#define W_FLAG_VERBOSE  0
-#define W_FLAG_QUIET    1
+#define M_FLAG_VERBOSE  0
+#define M_FLAG_QUIET    1
 
 /* Evaluate the first argc options given in argv */
 int parse_options(int argc, char* argv[]);

@@ -26,14 +26,14 @@ int parse_options(int argc, char* argv[])
             help();
             break;
         case 'v':
-            flag_set(W_FLAG_VERBOSE);
+            flag_set(M_FLAG_VERBOSE);
             break;
         case 'q':
-            flag_set(W_FLAG_QUIET);
+            flag_set(M_FLAG_QUIET);
             break;
         default:
             help();
-            say_stream(W_LOG_ERROR, stderr, "Invalid Option: %s\n", optarg);
+            say_stream(M_LOG_ERROR, stderr, "Invalid Option: %s\n", optarg);
             return -1;
         }
     }

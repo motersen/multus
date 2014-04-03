@@ -3,7 +3,7 @@
 #include "input.h"
 #include "output.h"
 #include "string_utilities.h"
-#include "wordcount.h"
+#include "multus.h"
 
 int main(int argc, char* argv[])
 {
@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
         return -1;
     GHashTable* hash = new_wordcount_hash();
     if(!hash)
-        say_stream(W_LOG_ERROR, stderr, "Could not allocate table\n");
+        say_stream(M_LOG_ERROR, stderr, "Could not allocate table\n");
     char* delimiters = " \n\t\r\"`~!?@#$%^&*()<>»«{}[]_-+=|\\;:,./";
     hash_streams(hash, input_streams(), delimiters);
     input_close();
