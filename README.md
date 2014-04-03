@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/motersen/wordcount.png?branch=master)](https://travis-ci.org/motersen/wordcount)
+[![Build Status](https://travis-ci.org/motersen/multus.svg?branch=master)](https://travis-ci.org/motersen/multus)
 
 multus
 =========
