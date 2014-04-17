@@ -6,20 +6,20 @@
 #include "options.h"
 #include "output.h"
 #include "multus.h"
+#include "utf8.h"
 
 void hash_word(char* word, GHashTable* hash)
 {
-    count_s* value = g_hash_table_lookup(hash, word);
+    char* key = (flag_get(M_FLAG_CASEFOLD))
+                    ? (char*) utf8_casefold((byte*) word)
+                    : strdup(word);
+    count_s* value = g_hash_table_lookup(hash, key);
     if(!value) {
         value = malloc(sizeof(count_s));
         *value = (count_s){};
-        char* key = strdup(word);
-        if(!key) {
-            fprintf(stderr, "Could not allocate memory to store \"%s\"\n", word);
-            free(value);
-            return;
-        }
         g_hash_table_insert(hash, key, value);
+    } else {
+        free(key);
     }
     value->count++;
 }

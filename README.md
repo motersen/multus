@@ -33,6 +33,8 @@ OPTIONS:
     Print status information
   -q --quiet
     Print only errors
+  -i --ignore-case
+    Ignore casing by fully folding all according to Unicode.
 
 INPUT may be sources that will be evaluated. Stdin is represented by
 "-", everything else is treated as a path to a file.

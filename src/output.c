@@ -52,6 +52,8 @@ return say(M_LOG_NORMAL,
             "\t        Print more information\n"
             "\t-q --quiet\n"
             "\t        Print only errors.\n"       
+            "\t-i --ignore-case\n"
+            "\t        Ignore casing by fully folding all according to Unicode.\n"
             "\n"
             "INPUT may be sources that will be evaluated. Stdin is represented by\n"
             "\'-\', everything else is treated as a path to a file.\n"

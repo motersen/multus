@@ -1,6 +1,6 @@
 CC =c99
 CFLAGS=-Wall -O2 -D_POSIX_C_SOURCE=200809L
-LIBS	=-lglib-2.0
+LIBS	=-lglib-2.0 -lm
 INCLUDE =`pkg-config --cflags glib-2.0`
 
 -include makerules.mk

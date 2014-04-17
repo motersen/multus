@@ -5,22 +5,23 @@
 #include "output.h"
 
 typedef struct {
-    unsigned int flags: 2;
+    unsigned int flags: 3;
 } optionstruct;
 
 static optionstruct options;
 
 static struct option long_options[] = {
-        {"help",    no_argument,       NULL, 'h'},
-        {"verbose", no_argument,       NULL, 'v'},
-        {"quiet",   no_argument,       NULL, 'q'},
+        {"help",        no_argument, NULL, 'h'},
+        {"verbose",     no_argument, NULL, 'v'},
+        {"quiet",       no_argument, NULL, 'q'},
+        {"ignore-case", no_argument, NULL, 'i'},
         {NULL,      0,                 NULL, 0}
 };
 
 int parse_options(int argc, char* argv[])
 {
     int optiter, optindex=0;
-    while((optiter = getopt_long(argc, argv, "hvq", long_options, &optindex)) != -1) {
+    while((optiter = getopt_long(argc, argv, "hvqi", long_options, &optindex)) != -1) {
         switch(optiter) {
         case 'h':
             help();
@@ -30,6 +31,9 @@ int parse_options(int argc, char* argv[])
             break;
         case 'q':
             flag_set(M_FLAG_QUIET);
+            break;
+        case 'i':
+            flag_set(M_FLAG_CASEFOLD);
             break;
         default:
             help();

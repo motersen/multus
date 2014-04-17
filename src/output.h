@@ -1,5 +1,6 @@
 #ifndef output
 #define output
+#include <stdio.h>
 
 #define M_LOG_VERBOSE   0
 #define M_LOG_NORMAL    1
