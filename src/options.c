@@ -5,7 +5,7 @@
 #include "output.h"
 
 typedef struct {
-    unsigned int flags: 3;
+    unsigned int flags: 4;
 } optionstruct;
 
 static optionstruct options;
@@ -15,13 +15,14 @@ static struct option long_options[] = {
         {"verbose",     no_argument, NULL, 'v'},
         {"quiet",       no_argument, NULL, 'q'},
         {"ignore-case", no_argument, NULL, 'i'},
+        {"stat",        no_argument, NULL, 's'},
         {NULL,      0,                 NULL, 0}
 };
 
 int parse_options(int argc, char* argv[])
 {
     int optiter, optindex=0;
-    while((optiter = getopt_long(argc, argv, "hvqi", long_options, &optindex)) != -1) {
+    while((optiter = getopt_long(argc, argv, "hvqis", long_options, &optindex)) != -1) {
         switch(optiter) {
         case 'h':
             help();
@@ -34,6 +35,9 @@ int parse_options(int argc, char* argv[])
             break;
         case 'i':
             flag_set(M_FLAG_CASEFOLD);
+            break;
+        case 's':
+            flag_set(M_FLAG_STAT);
             break;
         default:
             help();

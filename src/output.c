@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include "output.h"
 #include "options.h"
+#include "multus.h"
 
 static int loglevel_match(int minll)
 {
@@ -41,6 +42,27 @@ int say_stream(int minll, FILE* stream, char* format, ...)
     return status;
 }
 
+static void hash_stat(GHashTable* hash)
+{
+    say(M_LOG_NORMAL, "Total:     %8lu tokens\n",
+            values_sum(hash));
+    if(!flag_get(M_FLAG_CASEFOLD)) {
+        say(M_LOG_NORMAL, "Different: %8u individual tokens\n",
+                g_hash_table_size(hash)); 
+        fold_hash_table(&hash);
+    }
+    say(M_LOG_NORMAL, "Folds to:  %8u not equally casefolding tokens\n",
+                      g_hash_table_size(hash));
+}
+
+void output_table(GHashTable* hash)
+{
+    if(flag_get(M_FLAG_STAT))
+        hash_stat(hash);
+    else
+        g_hash_table_foreach(hash, print_set, NULL);
+}
+
 int help(void)
 {
 return say(M_LOG_NORMAL,
@@ -54,6 +76,8 @@ return say(M_LOG_NORMAL,
             "\t        Print only errors.\n"       
             "\t-i --ignore-case\n"
             "\t        Ignore casing by fully folding all according to Unicode.\n"
+            "\t-s --stat\n"
+            "\t        Print statistics about the input.\n"
             "\n"
             "INPUT may be sources that will be evaluated. Stdin is represented by\n"
             "\'-\', everything else is treated as a path to a file.\n"

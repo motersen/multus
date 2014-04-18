@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     char* delimiters = " \n\t\r\"`~!?@#$%^&*()<>»«{}[]_-+=|\\;:,./";
     hash_streams(hash, input_streams(), delimiters);
     input_close();
-    g_hash_table_foreach(hash, print_set, NULL);
+    output_table(hash);
     g_hash_table_destroy(hash);
     return 0;
 }

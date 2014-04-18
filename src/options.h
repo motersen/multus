@@ -1,11 +1,10 @@
 #ifndef Options
 #define Options
-#include <stdio.h>
-#include <getopt.h>
 
 #define M_FLAG_VERBOSE  0
 #define M_FLAG_QUIET    1
 #define M_FLAG_CASEFOLD 2
+#define M_FLAG_STAT     3
 
 /* Evaluate the first argc options given in argv */
 int parse_options(int argc, char* argv[]);

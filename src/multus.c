@@ -73,7 +73,47 @@ void print_set(gpointer key_in, gpointer val_in, gpointer ignored)
     say(M_LOG_NORMAL, "%d\t%s\n", val->count, key);
 }
 
+long unsigned int values_sum(GHashTable* hash)
+{
+    long unsigned int sum = 0;
+    count_s* buf = NULL;
+    GList* values = g_hash_table_get_values(hash);
+    GList* it = values;
+    while(it != NULL) {
+        buf = it->data;
+        sum += buf->count;
+        it = it->next;
+    }
+    g_list_free(values);
+    return sum;
+}
+
 GHashTable* new_wordcount_hash(void)
 {
     return g_hash_table_new_full(g_str_hash, g_str_equal, key_free, val_free);
+}
+
+static void fold_pair(gpointer key, gpointer val, gpointer to)
+{
+    char* ftok = (char*) utf8_casefold((byte*) key);
+    count_s* oldtv = val;
+    GHashTable* newt = to;
+    count_s* newtv = g_hash_table_lookup(newt, ftok);
+    if(!newtv) {
+        newtv = malloc(sizeof(count_s));
+        *newtv = (count_s) {};
+        g_hash_table_insert(newt, ftok, newtv);
+    } else {
+        free(ftok);
+    }
+    newtv->count += oldtv->count;
+}
+
+GHashTable* fold_hash_table(GHashTable** hash)
+{
+    GHashTable* out = new_wordcount_hash();
+    g_hash_table_foreach(*hash, fold_pair, out);
+    g_hash_table_destroy(*hash);
+    *hash = out;
+    return out;
 }

@@ -35,6 +35,8 @@ OPTIONS:
     Print only errors
   -i --ignore-case
     Ignore casing by fully folding all according to Unicode.
+  -s --stat
+    Print statistics about the input.
 
 INPUT may be sources that will be evaluated. Stdin is represented by
 "-", everything else is treated as a path to a file.
