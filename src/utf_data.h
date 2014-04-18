@@ -1,7 +1,6 @@
 #ifndef UTF_DATA_H
 #define UTF_DATA_H
 #include "utf8.h"
-#include <stdlib.h>
 
 #define map(...) (codepoint[]) {__VA_ARGS__, CODEPOINT_SENTINEL}
 
@@ -154,7 +153,7 @@ static codepoint codes[] = {
 	66599,
 	CODEPOINT_SENTINEL};
 
-static codepoint* mappings[15889584] = {
+static codepoint* mappings[7357616] = {
 	map(97),
 	map(98),
 	map(99),

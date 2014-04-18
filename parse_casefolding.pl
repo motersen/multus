@@ -34,12 +34,11 @@ set_mappings();
 make_foot();
 
 sub make_head {
-  print $src "#ifndef UTF_DATA_H\n";
-  print $src "#define UTF_DATA_H\n";
-  print $src "#include \"utf8.h\"\n";
-  print $src "#include <stdlib.h>\n\n";
-  print $src "#define map(...) ";
-  print $src "(codepoint[]) {__VA_ARGS__, CODEPOINT_SENTINEL}\n\n";
+  print $src "#ifndef UTF_DATA_H\n",
+             "#define UTF_DATA_H\n",
+             "#include \"utf8.h\"\n\n",
+             "#define map(...) ",
+             "(codepoint[]) {__VA_ARGS__, CODEPOINT_SENTINEL}\n\n";
 }
 
 sub make_foot {
@@ -54,8 +53,8 @@ sub set_codes {
     my @codes = map {${$_}[0]} @mappings;
     print $src "\n\t@codes,";
   }
-  print $src "\n\tCODEPOINT_SENTINEL";
-  print $src "};\n\n";
+  print $src "\n\tCODEPOINT_SENTINEL",
+             "};\n\n";
 }
 
 sub set_mappings {
