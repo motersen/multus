@@ -153,7 +153,7 @@ static codepoint codes[] = {
 	66599,
 	CODEPOINT_SENTINEL};
 
-static codepoint* mappings[7357616] = {
+static codepoint* mappings[1161] = {
 	map(97),
 	map(98),
 	map(99),

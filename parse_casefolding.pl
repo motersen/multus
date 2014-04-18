@@ -58,7 +58,7 @@ sub set_codes {
 }
 
 sub set_mappings {
-  printf $src "static codepoint* mappings[%d] = {\n", @folds;
+  printf $src "static codepoint* mappings[%d] = {\n", scalar @folds;
   local $" = ", ";
   for my $i (0 .. $#folds) {
     print $src "\tmap(@{@{$folds[$i]}[1]}),\n";
