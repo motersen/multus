@@ -57,35 +57,37 @@ sub make_rules {
     src2obj($_);
   } (keys %$targets);
   open my $file, ">", $filename or die "Error opening Rules-File: $!";
-  make_all($file, \@objects);
+  make_bin($file, \@objects);
   while(my ($key, $val) = each %$targets) {
     make_obj($file, $key, $val);
   }
-  make_prepare($file);
+  make_dirs($file);
   make_clean($file);
   make_new($file);
   close $file;
 }
 
-sub make_all {
+sub make_bin {
   my ($file, $deps) = @_;
-  print $file "all: @$deps\n";
-  print $file "\t\$(CC) \$(CFLAGS) -o $bin @$deps \$(LIBS)\n\n";
+  print $file "$bin: @$deps | $bin_dir\n";
+  print $file "\t".'$(CC) $(CFLAGS)'." -o $bin @$deps ".'$(LIBS)'."\n\n";
 }
 
 sub make_obj {
   my ($file, $src, $deps) = @_;
   #my $obj = $src =~ s/$src_dir(\w+\.)$src_ext/$obj_dir\1$obj_ext/r;
   my $obj = src2obj($src);
-  print $file "$obj: $src @$deps prepare\n";
-  print $file "\t".'$(CC) $(CFLAGS) $(INCLUDE) -c '."-o $obj $src\n\n";
+  print $file "$obj: $src @$deps | $obj_dir\n";
+  print $file "\t".'$(CC) $(CFLAGS) $(INCLUDE)'." -c -o $obj $src\n\n";
   return $obj;
 }
 
-sub make_prepare {
+sub make_dirs {
   my $file = shift;
-  print $file "prepare:\n";
-  print $file "\tmkdir -p $obj_dir $bin_dir\n\n";
+  for my $dir ($bin_dir, $obj_dir) {
+    print $file "$dir:\n",
+                "\tmkdir -p $dir\n\n";
+  }
 }
 
 sub make_clean {
@@ -96,7 +98,7 @@ sub make_clean {
 
 sub make_new {
   my $file = shift;
-  print $file "new: clean all\n\n";
+  print $file "new: clean $bin\n\n";
 }
 
 sub src2obj {
