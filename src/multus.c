@@ -13,6 +13,8 @@ void hash_word(char* word, GHashTable* hash)
     char* key = (flag_get(M_FLAG_CASEFOLD))
                     ? (char*) utf8_casefold((byte*) word)
                     : strdup(word);
+    if(!key)
+        return;
     count_s* value = g_hash_table_lookup(hash, key);
     if(!value) {
         value = malloc(sizeof(count_s));
