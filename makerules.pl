@@ -75,7 +75,6 @@ sub make_bin {
 
 sub make_obj {
   my ($file, $src, $deps) = @_;
-  #my $obj = $src =~ s/$src_dir(\w+\.)$src_ext/$obj_dir\1$obj_ext/r;
   my $obj = src2obj($src);
   print $file "$obj: $src @$deps | $obj_dir\n";
   print $file "\t".'$(CC) $(CFLAGS) $(INCLUDE)'." -c -o $obj $src\n\n";

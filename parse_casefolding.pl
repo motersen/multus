@@ -50,7 +50,7 @@ sub set_codes {
   my $it = List::MoreUtils::natatime(8, @folds);
   local $" = ", ";
   while(my @mappings = $it->()) {
-    my @codes = map {${$_}[0]} @mappings;
+    my @codes = map {$_->[0]} @mappings;
     print $src "\n\t@codes,";
   }
   print $src "\n\tCODEPOINT_SENTINEL",
@@ -61,7 +61,7 @@ sub set_mappings {
   printf $src "static codepoint* mappings[%d] = {\n", scalar @folds;
   local $" = ", ";
   for my $i (0 .. $#folds) {
-    print $src "\tmap(@{@{$folds[$i]}[1]}),\n";
+    print $src "\tmap(@{$folds[$i]->[1]}),\n";
   }
   print $src "};\n";
 }
